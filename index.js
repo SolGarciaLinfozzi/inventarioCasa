@@ -103,24 +103,44 @@ app.post('/', (req, res) => {
 
 app.post('/actualizar', (req, res) => {
 
-    const idProducto = req.body.idProducto
-    const nombreProducto = req.body.nombreProducto
-    const stockProducto = req.body.stockProducto
-    const estadoPoco = req.body.estadoPoco
-    const estadoModerado = req.body.estadoModerado
-    const estadoMucho = req.body.estadoMucho
+    const nombreProducto = req.body.nombre
+    const stockProducto = req.body.stock
 
-    let sql = "UPDATE productos SET nombreProducto =  '" + nombreProducto + "',stockProducto =  '" + stockProducto + "', estadoPoco =  '" + estadoPoco + "', estadoModerado =  '"+ estadoModerado + "', estadoMucho =  '"+ estadoMucho + "' WHERE idProducto = " +idProducto+  ";"
-    console.log(sql)
+    let sql = "UPDATE productos SET stockProducto = " + stockProducto + " WHERE nombreProducto = '" +nombreProducto+  "';"
     conexion.query(sql, function (err, result) {
         if (err) throw err;
-        console.log('Dato actualizado')
-        res.render('index')
+        let sql2 = "SELECT * FROM productos ORDER BY nombreProducto ASC";
+        conexion.query(sql2, function (err, result) {
+            if (err) throw err;
+            res.render('index', {
+                datos: result
+            })
+        })
     })
+    
 
 })
 
+//Eliminar
 
+app.post('/eliminar', (req, res) => {
+
+    const nombreProducto = req.body.producto
+
+    let sql = "DELETE FROM productos WHERE nombreProducto = '" +nombreProducto+  "';"
+    conexion.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(sql)
+        let sql2 = "SELECT * FROM productos ORDER BY nombreProducto ASC";
+        conexion.query(sql2, function (err, result) {
+            if (err) throw err;
+            res.render('index', {
+                datos: result
+            })
+        })
+    })
+
+})
 
 // servidor 
 app.listen(PORT, () => {

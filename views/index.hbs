@@ -1,151 +1,215 @@
-<div class="container text-center m-5">
-    <hr>
-    <h1>
-        INVENTARIO
-    </h1>
-    <hr>
-</div>
+<div class="general">
+
+    <div class="portada">
+        <h1 class="titulo"> Inventario </h1>
+        <img height="200px" src="./img/inventario1.jpg" alt="inventario">
+    </div>
+
+    <div class="container text-center m-5">
+
+        <div class="detalleEstadosStock">
+            <div class="detalleEstadoStock">
+                <span class="badge badge-dot mr-4">
+                    <i class="bg-danger"></i>
+                </span>
+                <h5>0-5</h5>
+            </div>
+            <div class="detalleEstadoStock">
+                <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i>
+                </span>
+                <h5>6-15</h5>
+            </div>
+            <div class="detalleEstadoStock">
+                <span class="badge badge-dot mr-4">
+                    <i class="bg-success"></i>
+                </span>
+                <h5>Más de 15</h5>
+            </div>
+        </div>
+    </div>
 
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
-<body>
-    <div class="main-content">
-        <div class="container mt-7">
+    <body>
+        <div class="main-content">
+            <div class="container mt-7">
 
-            <!-- Table -->
+                <!-- Table -->
 
-            <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <h3 class="mb-0"> Lista de productos </h3>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                <div class="col containerTabla">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <h3 class="mb-0"> Lista de productos </h3>
 
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Producto</th>
-                                    <th scope="col">Stock</th>
-                                    <th scope="col">Estado</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="tablaProductos">
 
-                            {{#each datos}}
-                            <tbody>
-                                <tr>
-                                    {{!-- Producto --}}
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-                                            <div class="media-body">
-                                                <span class="mb-0 text-sm"> {{ nombreProducto }} </span>
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Producto</th>
+                                        <th scope="col">Stock</th>
+                                        <th scope="col">Estado</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                {{#each datos}}
+                                <tbody>
+                                    <tr>
+                                        {{!-- Producto --}}
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="mb-0 text-sm"> {{ nombreProducto }} </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
+                                        </th>
 
-                                    {{!-- Stock --}}
-                                    <td>
-                                        {{ stockProducto }}
-                                    </td>
+                                        {{!-- Stock --}}
+                                        <td>
+                                            {{ stockProducto }}
+                                        </td>
 
-                                    {{!-- Status --}}
-                                    <td>
-                                        {{#if estadoPoco}}
-                                        <span class="badge badge-dot mr-4">
-                                            <i class="bg-danger"></i>
-                                        </span>
-                                        {{/if}}
-                                        {{#if estadoModerado}}
-                                        <span class="badge badge-dot mr-4">
-                                            <i class="bg-warning"></i>
-                                        </span>
-                                        {{/if}}
-                                        {{#if estadoMucho}}
-                                        <span class="badge badge-dot mr-4">
-                                            <i class="bg-success"></i>
-                                        </span>
-                                        {{/if}}
-                                    </td>
+                                        {{!-- Status --}}
+                                        <td>
+                                            {{#if estadoPoco}}
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-danger"></i>
+                                            </span>
+                                            {{/if}}
+                                            {{#if estadoModerado}}
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-warning"></i>
+                                            </span>
+                                            {{/if}}
+                                            {{#if estadoMucho}}
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-success"></i>
+                                            </span>
+                                            {{/if}}
+                                        </td>
 
-                                    {{!-- Botones --}}
-                                    <td id="tablaProductos">
-                                        <a href="javascript:void(0);" class="btn btn-primary actualizarStock"
-                                            data-idProducto="{{ idProducto }} " data-nombre="{{ nombreProducto }}"
-                                            data-stock="{{ stockProducto }}" data-estadoPoco="{{ estadoPoco }}"
-                                            data-estadoModerado="{{ estadoModerado }}"
-                                            data-estadoMucho="{{ estadoMucho }}"> Actualizar
-                                        </a>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                            {{/each}}
-                        </table>
+                                        {{!-- Boton --}}
+                                        <td>
+                                            <a href="javascript:void(0);" class="btn btn-primary actualizarStock"
+                                                data-nombre="{{ nombreProducto }}" data-idProducto=" {{ idProducto }} "
+                                                data-stock="{{ stockProducto }}" data-estadoPoco="{{ estadoPoco }}"
+                                                data-estadoModerado="{{ estadoModerado }}"
+                                                data-estadoMucho="{{ estadoMucho }}"> Actualizar
+                                            </a>
+                                            <a href="javascript:void(0);" class="eliminarProducto"
+                                                data-producto="{{ nombreProducto }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                {{/each}}
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 
 
 
+        <div class="container m-10">
+            <form action="/" method="post">
+                <h1 class="tituloFormAgregarProducto"> Agregar Producto</h1>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label"> Nombre del producto </label>
+                    <input type="text" class="form-control w-25" id="nombreProducto" name="nombreProducto" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Stock</label>
+                    <input type="number" class="form-control w-25" id="stockProducto" name="stockProducto" required>
+                </div>
 
-<div class="container m-5">
-    <form action="/" method="post">
-        <div class="mb-3">
-            <label for="nombre" class="form-label"> Nombre del producto </label>
-            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" required>
+                <div class="mb-3">
+                    <button type="submit" class="botonAgregar">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
+                            </svg> Agregar
+                        </span>
+                    </button>
+                </div>
+
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="precio" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="stockProducto" name="stockProducto" required>
-        </div>
-        <div class="mb-3 text-center">
-            <button type="submit" class="btn btn-primary w-75">Enviar</button>
+
+
+
+
+
+    {{!-- MODAL ACTUALIZAR --}}
+
+    <form action="/actualizar" method="post">
+        <div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nombre" class="col-form-label"> Nombre: </label>
+                            <input type="text" class="form-control nombre" id="nombre" name="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="col-form-label"> Stock: </label>
+                            <input type="number" class="form-control stock" id="stock" name="stock">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="idProducto" id="idProducto" class="idProducto" required>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                        <button type="submit" class="btn btn-primary"> Actualizar </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
 
+{{!-- MODAL ELIMINAR --}}
 
-
-
-{{!-- MODAL ACTUALIZAR --}}
-
-<form action="/update" method="post">
-    <div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form action="/eliminar" method="post">
+    <div class="modal" id="modalEliminar" role="dialog" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto</h1>
+                    <h5 class="modal-title">Eliminar Producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <div class="modal-body">
+                    <p>¿Está seguro que desea eliminar el Producto?</p>
                     <div class="mb-3">
-                        <label for="nombre" class="col-form-label"> Nombre: </label>
-                        <input type="text" class="form-control nombre" id="nombre" name="nombre">
-                    </div>
-                    <div class="mb-3">
-                        <label for="precio" class="col-form-label"> Stock: </label>
-                        <input type="number" class="form-control precio" id="precio" name="precio">
-                    </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="col-form-label"> Descripción: </label>
-                        <textarea class="form-control descripcion" id="descripcion" name="descripcion"></textarea>
+                        <label for="producto" class="col-form-label"> Nombre: </label>
+                        <input type="text" class="form-control producto" id="producto" name="producto">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="idProducto" id="idProducto" class="idProducto" required>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-                    <button type="submit" class="btn btn-primary"> Actualizar </button>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
-
 
 {{!-- js bootstrap --}}
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -153,12 +217,11 @@
     </script>
 
 
-
 <script>
     $(document).ready(function () {
 
-        $('#tablaProductos').on('click', '.actualizarStock', function () {  
-            let idProducto = $(this).data('idProducto')
+        $('#tablaProductos').on('click', '.actualizarStock', function () {
+            let idProducto = $(this).data('idProducto')  //NO ME RECONOCE EL ID
             let nombreProducto = $(this).data('nombre')
             let stockProducto = $(this).data('stock')
             let estadoPoco = $(this).data('estadoPoco')
@@ -166,8 +229,13 @@
             let estadoMucho = $(this).data('estadoMucho')
             $('#modalActualizar').modal('show')
             $('.nombre').val(nombreProducto)
-            $('.precio').val(stockProducto)
-            $('.descripcion').val(idProducto)
+            $('.stock').val(stockProducto)
+        })
+
+        $('#tablaProductos').on('click', '.eliminarProducto', function () {
+            let nombreProducto = $(this).data('producto')
+            $('#modalEliminar').modal('show')
+            $('.producto').val(nombreProducto)
         })
     })
 </script>

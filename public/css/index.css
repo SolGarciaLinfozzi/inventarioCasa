@@ -1,3 +1,22 @@
+.general {
+    font-family: 'Courier Prime', monospace;
+}
+
+.portada {
+    display: flex;
+    margin-top: 40px;
+}
+
+.portada img {
+    margin-left: 30px;
+}
+
+.titulo {
+    font-size: 60px;
+    margin-top: 20px;
+    margin-left: 140px;
+}
+
 :root {
     --blue: #5e72e4;
     --indigo: #5603ad;
@@ -1492,4 +1511,48 @@ p {
     .btn {
         margin-bottom: 10px;
     }
+}
+
+.detalleEstadosStock {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-around;
+}
+
+.detalleEstadoStock {
+    display: flex;
+}
+
+.contenidoFormProductos{
+    display: flex;
+}
+
+.tituloFormAgregarProducto {
+    margin-top: 80px;
+    margin-bottom: 20px;
+}
+
+
+.botonAgregar {
+    border: 2px solid #24b4fb;
+    background-color: #24b4fb;
+    border-radius: 0.9em;
+    padding: 0.6em 1em 0.6em 0.8em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.botonAgregar span {
+    display: flex;
+    color: #fff;
+    font-weight: 600;
+}
+
+.botonAgregar:hover {
+    background-color: #0071e2;
+}
+
+.eliminarProducto{
+    color: #000;
 }
