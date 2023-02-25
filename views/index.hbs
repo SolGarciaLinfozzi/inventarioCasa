@@ -1,0 +1,173 @@
+<div class="container text-center m-5">
+    <hr>
+    <h1>
+        INVENTARIO
+    </h1>
+    <hr>
+</div>
+
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+<body>
+    <div class="main-content">
+        <div class="container mt-7">
+
+            <!-- Table -->
+
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0"> Lista de productos </h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Estado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            {{#each datos}}
+                            <tbody>
+                                <tr>
+                                    {{!-- Producto --}}
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+                                            <div class="media-body">
+                                                <span class="mb-0 text-sm"> {{ nombreProducto }} </span>
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                    {{!-- Stock --}}
+                                    <td>
+                                        {{ stockProducto }}
+                                    </td>
+
+                                    {{!-- Status --}}
+                                    <td>
+                                        {{#if estadoPoco}}
+                                        <span class="badge badge-dot mr-4">
+                                            <i class="bg-danger"></i>
+                                        </span>
+                                        {{/if}}
+                                        {{#if estadoModerado}}
+                                        <span class="badge badge-dot mr-4">
+                                            <i class="bg-warning"></i>
+                                        </span>
+                                        {{/if}}
+                                        {{#if estadoMucho}}
+                                        <span class="badge badge-dot mr-4">
+                                            <i class="bg-success"></i>
+                                        </span>
+                                        {{/if}}
+                                    </td>
+
+                                    {{!-- Botones --}}
+                                    <td id="tablaProductos">
+                                        <a href="javascript:void(0);" class="btn btn-primary actualizarStock"
+                                            data-idProducto="{{ idProducto }} " data-nombre="{{ nombreProducto }}"
+                                            data-stock="{{ stockProducto }}" data-estadoPoco="{{ estadoPoco }}"
+                                            data-estadoModerado="{{ estadoModerado }}"
+                                            data-estadoMucho="{{ estadoMucho }}"> Actualizar
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+<div class="container m-5">
+    <form action="/" method="post">
+        <div class="mb-3">
+            <label for="nombre" class="form-label"> Nombre del producto </label>
+            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" required>
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="stockProducto" name="stockProducto" required>
+        </div>
+        <div class="mb-3 text-center">
+            <button type="submit" class="btn btn-primary w-75">Enviar</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+{{!-- MODAL ACTUALIZAR --}}
+
+<form action="/update" method="post">
+    <div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombre" class="col-form-label"> Nombre: </label>
+                        <input type="text" class="form-control nombre" id="nombre" name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="col-form-label"> Stock: </label>
+                        <input type="number" class="form-control precio" id="precio" name="precio">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="col-form-label"> Descripción: </label>
+                        <textarea class="form-control descripcion" id="descripcion" name="descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="idProducto" id="idProducto" class="idProducto" required>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                    <button type="submit" class="btn btn-primary"> Actualizar </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{{!-- js bootstrap --}}
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+    </script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#tablaProductos').on('click', '.actualizarStock', function () {  
+            let idProducto = $(this).data('idProducto')
+            let nombreProducto = $(this).data('nombre')
+            let stockProducto = $(this).data('stock')
+            let estadoPoco = $(this).data('estadoPoco')
+            let estadoModerado = $(this).data('estadoModerado')
+            let estadoMucho = $(this).data('estadoMucho')
+            $('#modalActualizar').modal('show')
+            $('.nombre').val(nombreProducto)
+            $('.precio').val(stockProducto)
+            $('.descripcion').val(idProducto)
+        })
+    })
+</script>
